@@ -1,12 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+    <title>Opencv.js tutorial</title>
 </head>
-<body>
-  change
+<script async src="https://docs.opencv.org/3.4/opencv.js"></script>
+<!--script async src="./opencv.js"></script-->
+
+<body onload="setSize()">
+    <button id="toggleStream" onclick="toggleStream()">Play</button>
+    <button id="cvtGray" onclick="cvtGray()" style="visibility: hidden;">Convert to Gray</button>
+    <br>
+    <br>
+    <video id="video"></video>
+    <br>
+    <canvas id='output'></canvas>
 </body>
+
+<script src="./test.js"></script>
+
 </html>
