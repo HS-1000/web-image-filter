@@ -3,7 +3,7 @@ const a = function() {
   imgInput.addEventListener('change', function(e) {
     if(e.target.files) {
       let imageFile = e.target.files[0]; //here we get the image file
-      var reader = new FileReader();
+      var reader = new FileReader(); 
       reader.readAsDataURL(imageFile);
       reader.onloadend = function (e) {
         var myImage = new Image(); // Creates image object
