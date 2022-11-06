@@ -1,14 +1,7 @@
 // functions shortcut
 const d = document;
 const print = (target, dir=false) => {
-  let printArray = Array.from(target);
-  if(printArray.length == 0) {
-    dir ? console.dir(target) : console.log(target);
-  } else {
-    dir ? 
-    printArray.forEach(element => console.dir(element)) :
-    printArray.forEach(element => console.log(element));
-  }
+  dir ? console.dir(target) : console.log(target);
 }
 const selector = (target, from=d) => {
   return from.querySelector(target);
@@ -34,7 +27,54 @@ const clearClass = function (element) {
   }
 };
 // hide loading page and show main
+let pageLoad = false;
 const pageReady = () => {
   selector('.loading').style.display = 'none';
   removeClass(selector('.main'), 'hide');
+  pageLoad = true;
 }
+window.onload = () => {
+  pageReady()
+}
+  
+// const pageReady = () => {
+//   return new Promise((resolve, reject) => {
+//     setTimeout(() => {
+//       selector('.loading').style.display = 'none';
+//       removeClass(selector('.main'), 'hide');
+//       resolve();
+//     }, 100);
+//   });
+// }
+
+// input file display at canvas element
+const input2canvas = (input, canvas) => {
+  print(1);
+  if(!input.files || !pageLoad){
+    print(2);
+    return 0;
+  }
+  let imgFile = input.files[0];
+  let reader = new FileReader();
+  reader.readAsDataURL(imgFile);
+  reader.onloadend = event => {
+    let img = new Image();
+    img.src = event.target.result;
+    img.onload = eve => {
+      let context = canvas.getContext('2d');
+      canvas.width = img.width;
+      canvas.height = img.height;
+      context.drawImage(img, 0, 0);
+    }
+  }
+};
+let inputImgFile = selector("#file_input");
+let displayCanvas = selector("#input_canvas");
+inputImgFile.addEventListener('change', (event) => {
+  print(event.target, true);
+  input2canvas(event.target, displayCanvas);
+});
+
+
+
+
